@@ -13,13 +13,12 @@ It requires O(n2) time.
 
 Thus, parallelization can be achieved in the following way:
  1. Partition the input set V into p subsets, such that each subset contains n/p consecutive vertices and their edges, and assign each process a different subset.
- Each process also contains part of array d for vertices in its partition.
- Let Vi be the subset assigned to process pi, and di part of array d which pi maintains.
-
- Partitioning of adjacency matrix is illustrated in Fig. 1. 1.
+    Each process also contains part of array d for vertices in its partition.
+    Let Vi be the subset assigned to process pi, and di part of array d which pi maintains.
+    Partitioning of adjacency matrix is illustrated in Fig. 1. 1.
  2. Every process pi finds minimum-weight edge ei (candidate) connecting MST with a vertex in Vi. 
  3. Every process pi sends its ei edge to the root process using all-to-one reduction.
- 4. From the received edges, the root process selects one with a minimum weight (called global minimum-weight edge emin), adds it to MST and broadcasts it to all other processes.
+ 4. From the received edges, the root process selects one with a minimum weight (called global minimum-weight edge emin), adds it to MST and broadcasts it to all other 	     processes.
  5. Processes mark vertices connected by emin as belonging to MST and update their part of array d. 6. Repeat steps 2–5 until every vertex is in MST.
 
 ### Time and Complexity of parallel
